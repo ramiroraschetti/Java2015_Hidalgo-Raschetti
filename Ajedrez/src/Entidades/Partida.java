@@ -1,46 +1,82 @@
 package Entidades;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Partida {
 
 	private int idPartida;
-	private int jugBlanca, jugNegra;
-	private Pieza fichas;
+	private Jugador jugadorBlancas, jugadorNegras;
+	private String turno = "blanca";
+	ArrayList<Pieza> piezasPartida = new ArrayList<Pieza>();
 	
-	
-	public int getId() {
+	public int getIdPartida() {
 		return idPartida;
 	}
-	public void setId(int id) {
-		this.idPartida = id;
-	}
-	public int getJugBlanca() {
-		return jugBlanca;
-	}
-	public void setJugBlanca(int jugBlanca) {
-		this.jugBlanca = jugBlanca;
-	}
-	public int getJugNegra() {
-		return jugNegra;
-	}
-	public void setJugNegra(int jugNegra) {
-		this.jugNegra = jugNegra;
-	}
-	public Pieza getFichas() {
-		return fichas;
-	}
-	public void setFichas(Pieza fichas) {
-		this.fichas = fichas;
-	}
-	public Partida(int idPartida, int jugBlanca, int jugNegra) {
-		super();
+	public void setIdPartida(int idPartida) {
 		this.idPartida = idPartida;
-		this.jugBlanca = jugBlanca;
-		this.jugNegra = jugNegra;
+	}
+	public Jugador getJugadorBlancas() {
+		return jugadorBlancas;
+	}
+	public void setJugadorBlancas(Jugador jugadorBlancas) {
+		this.jugadorBlancas = jugadorBlancas;
+	}
+	public Jugador getJugadorNegras() {
+		return jugadorNegras;
+	}
+	public void setJugadorNegras(Jugador jugadorNegras) {
+		this.jugadorNegras = jugadorNegras;
+	}
+	public String getTurno() {
+		return turno;
+	}
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+		public ArrayList<Pieza> getPiezasPartida() {
+		return piezasPartida;
+	}
+	public void setPiezasPartida(ArrayList<Pieza> piezasPartida) {
+		this.piezasPartida = piezasPartida;
 	}
 	
-	public String toString(){
-		return "\nID: "+String.valueOf(this.getId()) +"\n"+ "Contrincante Dni: "+String.valueOf(this.getJugNegra());
+	
+	public Partida() {}
+	
+	public Partida(Jugador jugadorBlancas, Jugador jugadorNegras) {
+		this.jugadorBlancas = jugadorBlancas;
+		this.jugadorNegras = jugadorNegras;
+		colocarFichas();
 	}
+	
+	public void colocarFichas(){
+		
+		for (char x = 'a'; x <= 'h'; x++){
+			PiezaPeon peon = new PiezaPeon();
+			peon.setPosicion(new Posicion(x, 2));
+			peon.setJugador(getJugadorBlancas());
+			piezasPartida.add(peon);
+		}
+		
+		PiezaTorre torre1 = new PiezaTorre();
+		torre1.setPosicion(new Posicion('a',1));
+		torre1.setJugador(getJugadorBlancas());
+		piezasPartida.add(torre1);
+		
+		PiezaTorre torre2 = new PiezaTorre();
+		torre2.setPosicion(new Posicion('h',1));
+		torre2.setJugador(getJugadorBlancas());
+		piezasPartida.add(torre2);
+			
+	}
+	
+	public void cambiarTurno(){
+        if (Objects.equals(turno, "blanco")) 
+        		turno="negro"; 
+        	else turno="blanco";
+    }
+	
 	
 	
 	

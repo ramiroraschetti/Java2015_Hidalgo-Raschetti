@@ -1,9 +1,12 @@
 package Entidades;
 
+import java.util.ArrayList;
+
 public class Jugador {
 
 	private int dni;
 	private String nombre, apellido;
+	ArrayList<Partida> partidasPendientes ;
 	
 	public int getDni() {
 		return dni;

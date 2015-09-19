@@ -14,25 +14,25 @@ private int contId=2;
 
 	public DbPartidas(){
 		colPartidas = new ArrayList<Partida>();
-		Partida e = new Partida(1,12345678,33098016);
+		Partida e = new Partida();
 		colPartidas.add(e);
 	}
 	
 	public void add(int dniB, int dniN){
-		Partida p = new Partida(contId , dniB, dniN);
+		Partida p = new Partida();
 		contId++;
 		colPartidas.add(p);
 	}
 	
 	public void busqueda(int dni){
-		colPartJugando = new ArrayList<Partida>();
-
-			for (Partida partida : colPartidas) {
-				if (partida.getJugBlanca() == dni){
-					colPartJugando.add(partida);
-				}
-			}
-			System.out.println(colPartJugando);
+//		colPartJugando = new ArrayList<Partida>();
+//
+//			for (Partida partida : colPartidas) {
+//				if (partida.getJugBlanca() == dni){
+//					colPartJugando.add(partida);
+//				}
+//			}
+//			System.out.println(colPartJugando);
 			
 		}
 	
