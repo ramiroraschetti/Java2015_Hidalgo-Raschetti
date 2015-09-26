@@ -68,7 +68,16 @@ public class Partida {
 		torre2.setPosicion(new Posicion('h',1));
 		torre2.setJugador(getJugadorBlancas());
 		piezasPartida.add(torre2);
-			
+		
+		PiezaCaballo caballo1 = new PiezaCaballo();
+		caballo1.setPosicion(new Posicion('g', 1));
+		caballo1.setJugador(getJugadorBlancas());
+		piezasPartida.add(caballo1);
+		
+		
+		
+		PiezaAlfil alfil1 = new PiezaAlfil();
+		
 	}
 	
 	public void cambiarTurno(){
