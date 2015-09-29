@@ -2,13 +2,19 @@ package Entidades;
 
 public abstract class Pieza {
 
+	private int idPieza;
 	private char nombre;
 	private String color;
 	private Posicion posicion;
 	private Jugador jugador;
 	private boolean estadoPieza = true; //Si la pieza fue comida el estado es false, si esta en el tablero es true
 	
-	
+	public int getIdPieza() {
+		return idPieza;
+	}
+	public void setIdPieza(int idPieza) {
+		this.idPieza = idPieza;
+	}
 	public char getNombre() {
 		return nombre;
 	}

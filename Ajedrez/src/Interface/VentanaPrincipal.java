@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -27,15 +28,18 @@ import javax.swing.JTextArea;
 
 
 
+
+
 import Controlador.CtrlJugar;
 import Entidades.Partida;
+import Entidades.Pieza;
 
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textDni_Blancas;
-	private JTextField textDni_Negras;
+	private JTextField textDni_Jug1;
+	private JTextField textDni_Jug2;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	
@@ -67,15 +71,15 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblJugadorBlancas = new JLabel("Jugador Blancas: ");
+		JLabel lblJugador1 = new JLabel("Jugador 1: ");
 		
-		textDni_Blancas = new JTextField();
-		textDni_Blancas.setColumns(10);
+		textDni_Jug1 = new JTextField();
+		textDni_Jug1.setColumns(10);
 		
-		JLabel lblJugadorNegras = new JLabel("Jugador Negras: ");
+		JLabel lblJugador2 = new JLabel("Jugador 2: ");
 		
-		textDni_Negras = new JTextField();
-		textDni_Negras.setColumns(10);
+		textDni_Jug2 = new JTextField();
+		textDni_Jug2.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Jugar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -149,7 +153,7 @@ public class VentanaPrincipal extends JFrame {
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 									.addComponent(lblBlancas)
-									.addComponent(lblJugadorBlancas))
+									.addComponent(lblJugador1))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addGap(84)
@@ -157,8 +161,8 @@ public class VentanaPrincipal extends JFrame {
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(textDni_Negras, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-											.addComponent(textDni_Blancas, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+											.addComponent(textDni_Jug2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+											.addComponent(textDni_Jug1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_contentPane.createSequentialGroup()
 												.addGap(18)
@@ -189,7 +193,7 @@ public class VentanaPrincipal extends JFrame {
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 									.addComponent(btnSalir)
 									.addComponent(btnMostrarPosiciones))))
-						.addComponent(lblJugadorNegras))
+						.addComponent(lblJugador2))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -197,13 +201,13 @@ public class VentanaPrincipal extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textDni_Blancas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJugadorBlancas)
+						.addComponent(textDni_Jug1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblJugador1)
 						.addComponent(btnBuscarOponente))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblJugadorNegras)
-						.addComponent(textDni_Negras, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblJugador2)
+						.addComponent(textDni_Jug2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton))
 					.addGap(33)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -241,14 +245,15 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	private void jugar(){
-		ctrlJug.iniciarPartida(Integer.parseInt(textDni_Blancas.getText()), Integer.parseInt(textDni_Negras.getText()));
-		
+		Partida p = new Partida();
+		p = ctrlJug.iniciarPartida(Integer.parseInt(textDni_Jug1.getText()), Integer.parseInt(textDni_Jug2.getText()));
+		JOptionPane.showMessageDialog(this, "Haga click en Mostrar Posiciones para ver las disposicion de las fichas");
 		
 	}
 	
 	private void busquedaPartida(){
 		
-		ctrlJug.buscarOponente(Integer.parseInt(textDni_Blancas.getText()));
+		ctrlJug.buscarOponente(Integer.parseInt(textDni_Jug1.getText()));
 		
 		
 	}
