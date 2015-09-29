@@ -8,4 +8,10 @@ public class PiezaAlfil extends Pieza {
 			return false;
 		}
 
+	@Override
+	public void moverPieza() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

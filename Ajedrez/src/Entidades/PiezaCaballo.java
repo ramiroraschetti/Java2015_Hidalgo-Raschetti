@@ -9,4 +9,10 @@ public class PiezaCaballo extends Pieza{
 				return false;
 			}
 
+		@Override
+		public void moverPieza() {
+			// TODO Auto-generated method stub
+			
+		}
+
 }

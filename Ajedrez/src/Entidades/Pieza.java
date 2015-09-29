@@ -50,4 +50,5 @@ public abstract class Pieza {
 	
 		
 	public abstract boolean movimientoValido();
+	public abstract void moverPieza();
 }
