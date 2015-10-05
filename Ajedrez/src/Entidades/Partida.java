@@ -7,7 +7,7 @@ public class Partida {
 
 	private int idPartida;
 	private int jugador1, jugador2;
-	private String turno = "blanca";
+	private String turno = "blanca"; //kike: hay que definir BLANCA o BLANCO, fijate el metodo
 	private boolean estadoPartida= true; //true partida aun en juego - false partida finalizada
 	private ArrayList<Pieza> piezasPartida = new ArrayList<Pieza>();
 	
@@ -41,7 +41,7 @@ public class Partida {
 	public void setEstadoPartida(boolean estadoPartida) {
 		this.estadoPartida = estadoPartida;
 	}
-		public ArrayList<Pieza> getPiezasPartida() {
+	public ArrayList<Pieza> getPiezasPartida() {
 		return piezasPartida;
 	}
 	public void setPiezasPartida(ArrayList<Pieza> piezasPartida) {
@@ -65,7 +65,39 @@ public class Partida {
     }
 	
 	
-	
+	public void moverPieza(char mueveX, int mueveY, char posX, int posY) throws Exception {
+		Posicion posicion = new Posicion(posX, posY);
+		Posicion posicionHacia = new Posicion(mueveX, mueveY);
+		Pieza piezaElegida = null;
+		Pieza piezaAComer;
+		boolean movimientoCome = false;
+		
+		//Buscamos la pieza a mover, la pieza a comer, y validamos que no este ocupada por una del mismo color
+		for(Pieza pieza : getPiezasPartida()){
+			if(posicion.equals(pieza.getPosicion())){
+				piezaElegida = pieza;
+			} 
+			if(posicionHacia.equals(pieza.getPosicion())){
+				if(pieza.getColor().equals(getTurno())){
+					throw new Exception("La posicion a mover se encuentra ocupada por una pieza del mismo color");
+				} else {
+					movimientoCome = true;
+					piezaAComer = pieza;
+				}
+			}					
+		}
+		
+		if(piezaElegida == null){
+			throw new Exception("No hay pieza en la posicion Origen");
+		}
+		
+		
+		if(piezaElegida.movimientoValido(mueveX, mueveY, movimientoCome)){
+			//TODO: validacion x pieza 
+		};
+		
+		//TODO: cambiar el estado de la pieza comida, sacarla del juego, cambiar de turnoss
+	}
 	
 	
 }
