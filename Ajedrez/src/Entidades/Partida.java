@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Partida {
 
 	private int idPartida;
-	private Jugador jugador1, jugador2;
+	private int jugador1, jugador2;
 	private String turno = "blanca";
 	private boolean estadoPartida= true; //true partida aun en juego - false partida finalizada
 	private ArrayList<Pieza> piezasPartida = new ArrayList<Pieza>();
@@ -17,17 +17,17 @@ public class Partida {
 	public void setIdPartida(int idPartida) {
 		this.idPartida = idPartida;
 	}
-	public Jugador getJugadorBlancas() {
+	public int getJugador1() {
 		return jugador1;
 	}
-	public void setJugadorBlancas(Jugador jugadorBlancas) {
-		this.jugador1 = jugadorBlancas;
+	public void setJugador1(int jugador1) {
+		this.jugador1 = jugador1;
 	}
-	public Jugador getJugadorNegras() {
+	public int getJugador2() {
 		return jugador2;
 	}
-	public void setJugadorNegras(Jugador jugadorNegras) {
-		this.jugador2 = jugadorNegras;
+	public void setJugador2(int jugador2) {
+		this.jugador2 = jugador2;
 	}
 	public String getTurno() {
 		return turno;
@@ -51,7 +51,7 @@ public class Partida {
 	
 	public Partida() {}
 	
-	public Partida(Jugador jugador1, Jugador jugador2) {
+	public Partida(int jugador1, int jugador2) {
 		this.jugador1 = jugador1;
 		this.jugador2 = jugador2;
 				
