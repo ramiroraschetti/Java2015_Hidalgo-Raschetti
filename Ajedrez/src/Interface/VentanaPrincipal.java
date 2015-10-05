@@ -40,8 +40,6 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTextField textDni_Jug1;
 	private JTextField textDni_Jug2;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	
 	private CtrlJugar ctrlJug = new CtrlJugar(); 
 	private ArrayList<Partida> partidasEmpezadas;
@@ -65,8 +63,9 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+		setTitle("Ajedrez - Ventana Inicio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 512, 461);
+		setBounds(100, 100, 330, 141);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -89,51 +88,6 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		JLabel lblTurno = new JLabel("Turno: ");
-		
-		JLabel lblMovimientos = new JLabel("MOVIMIENTOS");
-		lblMovimientos.setVerticalAlignment(SwingConstants.TOP);
-		lblMovimientos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		JLabel lblOrigen = new JLabel("Origen :  ");
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		
-		JLabel lblDestino = new JLabel("Destino : ");
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		
-		JButton btnMover = new JButton("Mover");
-		
-		JLabel lblBlancas = new JLabel("BLANCAS");
-		lblBlancas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		
-		JLabel lblNegras = new JLabel("NEGRAS");
-		lblNegras.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		
-		JTextArea textArea_Blancas = new JTextArea();
-		textArea_Blancas.setEditable(false);
-		
-		JTextArea textArea_Negras = new JTextArea();
-		textArea_Negras.setEditable(false);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		
-		JButton btnMostrarPosiciones = new JButton("Mostrar Posiciones");
-		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
 		JButton btnBuscarOponente = new JButton("Buscar Oponente");
 		btnBuscarOponente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -146,55 +100,21 @@ public class VentanaPrincipal extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(btnGuardar)
-								.addGap(276))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addComponent(lblBlancas)
-									.addComponent(lblJugador1))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(84)
-										.addComponent(lblNegras))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(textDni_Jug2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-											.addComponent(textDni_Jug1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(18)
-												.addComponent(btnBuscarOponente))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(45)
-												.addComponent(btnNewButton)))))
-								.addGap(269)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textArea_Blancas, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(textArea_Negras, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
+							.addComponent(lblJugador1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(textDni_Jug2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+								.addComponent(textDni_Jug1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblOrigen)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addComponent(btnBuscarOponente))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblDestino)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblTurno)
-								.addComponent(btnMover, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(22)
-									.addComponent(lblMovimientos, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addComponent(btnSalir)
-									.addComponent(btnMostrarPosiciones))))
+									.addGap(45)
+									.addComponent(btnNewButton))))
 						.addComponent(lblJugador2))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(165, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -209,37 +129,7 @@ public class VentanaPrincipal extends JFrame {
 						.addComponent(lblJugador2)
 						.addComponent(textDni_Jug2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton))
-					.addGap(33)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblBlancas)
-								.addComponent(lblNegras))
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textArea_Blancas, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textArea_Negras, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTurno)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblMovimientos, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblOrigen)
-								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblDestino)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addComponent(btnMover)
-							.addGap(18)
-							.addComponent(btnMostrarPosiciones)))
-					.addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnGuardar)
-						.addComponent(btnSalir))
-					.addContainerGap())
+					.addContainerGap(60, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -247,7 +137,10 @@ public class VentanaPrincipal extends JFrame {
 	private void jugar(){
 		Partida p = new Partida();
 		p = ctrlJug.iniciarPartida(Integer.parseInt(textDni_Jug1.getText()), Integer.parseInt(textDni_Jug2.getText()));
-		JOptionPane.showMessageDialog(this, "Haga click en Mostrar Posiciones para ver las disposicion de las fichas");
+		if ( p != null){
+			VentanaJuego juego = new VentanaJuego();
+			juego.setP(p);
+		}
 		
 	}
 	

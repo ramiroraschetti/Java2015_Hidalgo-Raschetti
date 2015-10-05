@@ -49,6 +49,18 @@ public abstract class Pieza {
 	}
 	
 		
-	public abstract boolean movimientoValido();
-	public abstract void moverPieza();
+	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
+		 if (!(mueveX>='a' && mueveX<='h') || !(mueveY>=1 && mueveY<=8)) {
+	            throw new Exception("Pieza out of bound");
+	        }
+		 
+		 char posX = getPosicion().getPosFila();
+	        int posY = getPosicion().getPosColumna();
+	        if (posX == mueveX && posY == mueveY) throw new Exception("La pieza ya se encuentra en esa posicion");
+
+		 return true;
+	};
+	
+	public abstract void moverPieza(char mueveX, int mueveY);
+	
 }

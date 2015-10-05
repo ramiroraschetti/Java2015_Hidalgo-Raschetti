@@ -2,8 +2,11 @@ package Datos;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+
 
 
 
@@ -15,17 +18,53 @@ import Entidades.PiezaRey;
 
 public class DbPartidas {
 	
-//private static ArrayList<Partida> colPartidas;
-//private static ArrayList<Partida> colPartJugando;
+  private static ArrayList<Partida> colPartidas;
+  private static ArrayList<Partida> colPartJugando;
 //private static Pieza[] piezasPartida; 
 
 	public DbPartidas(){
-
+		colPartidas = new ArrayList<Partida>();
+		colPartJugando = new ArrayList<Partida>();
 	}
 	
 	public Partida partidaNueva(int dni1, int dni2){  //iniciar partida nueva entre 2 jugadores
 		//crear la partida nueva con los datos, asignar fichas y hay q devolver la partida entera
 		Partida p = new Partida();
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"insert into partida(jugador1, jugador2, turno, estadoPartida) values (?,?, 'blanca', true)", PreparedStatement.RETURN_GENERATED_KEYS
+					);
+			stmt.setInt(1, p.getJugador1());
+			stmt.setInt(2, p.getJugador2());
+			
+			stmt.execute();
+
+			rs=stmt.getGeneratedKeys();
+			
+			if(rs!=null && rs.next()){
+				p.setIdPartida(rs.getInt(1));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			
+			try {
+				if(rs!=null ) rs.close();
+				if(stmt != null) stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			FactoryConexion.getInstancia().releaseConn();
+		}
+		
 		
 		return p;
 	}
@@ -44,7 +83,35 @@ public class DbPartidas {
 	
 	
 	public void busqueda(int dni){                   //buscar partidas abiertas del dni ingresado y mostrar los dni de oponentes
-
+		ResultSet rs=null;
+		Statement stmt=null;
+		Partida p=null;
+		try {
+			stmt = 	FactoryConexion.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("select idPartida, jugador1, jugador2 from partida where ((jugador1=?) or (jugador2 = ?)) and estadoPartida = true;");
+			while(rs !=null && rs.next()){
+				p=new Partida();
+				p.setIdPartida(rs.getInt("idPartida"));
+				p.setJugador1(rs.getInt("jugador1"));
+				p.setJugador2(rs.getInt("jugador2"));
+				colPartJugando.add(p);
+			}
+			System.out.println(colPartJugando);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null) stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			FactoryConexion.getInstancia().releaseConn();
+		}
 			
 		}
 
