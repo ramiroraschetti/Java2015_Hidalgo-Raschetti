@@ -18,16 +18,22 @@ import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
+import Controlador.CtrlJugar;
 import Entidades.Partida;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
 public class VentanaJuego extends JFrame {
 
 	private JPanel contentPane;
 	private Partida p;
-
+	private JTextField txtTurno;
+	private JTextArea txtPosicionesPiezasBlancas;
+	private CtrlJugar ctrlJug = new CtrlJugar(); 
 	
 	public void setP(Partida p){
 		this.p =p;
@@ -62,12 +68,8 @@ public class VentanaJuego extends JFrame {
 		JLabel lblPiezasBlancas = new JLabel("Piezas Blancas");
 		lblPiezasBlancas.setFont(new Font("Arial", Font.BOLD, 12));
 		
-		JTextPane textPane = new JTextPane();
-		
 		JLabel lblPiezasNegras = new JLabel("Piezas Negras");
 		lblPiezasNegras.setFont(new Font("Arial", Font.BOLD, 12));
-		
-		JTextPane textPane_1 = new JTextPane();
 		
 		JLabel lblTurno = new JLabel("Turno :");
 		
@@ -79,12 +81,28 @@ public class VentanaJuego extends JFrame {
 		JLabel lblDestino = new JLabel("Destino :");
 		
 		JButton btnMover = new JButton("MOVER");
+		btnMover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				realizarMovimiento();
+			}
+
+			
+		});
 		
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		txtTurno = new JTextField();
+		txtTurno.setEditable(false);
+		txtTurno.setColumns(10);
+		
+		txtPosicionesPiezasBlancas = new JTextArea();
+		txtPosicionesPiezasBlancas.setEditable(false);
+		txtPosicionesPiezasBlancas.setRows(16);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -92,21 +110,23 @@ public class VentanaJuego extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblPiezasBlancas)
-						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
+						.addComponent(txtPosicionesPiezasBlancas, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+					.addGap(40)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textPane_1, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-							.addGap(53)
+							.addGap(159)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnSalir)
 								.addComponent(btnMover)
 								.addComponent(lblDestino)
 								.addComponent(lblOrigen)
-								.addComponent(lblMovimientos)
-								.addComponent(lblTurno)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblTurno)
+									.addGap(18)
+									.addComponent(txtTurno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblMovimientos)))
 						.addComponent(lblPiezasNegras))
-					.addContainerGap(122, Short.MAX_VALUE))
+					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -114,12 +134,12 @@ public class VentanaJuego extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPiezasBlancas)
 						.addComponent(lblPiezasNegras))
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(textPane)
-						.addComponent(textPane_1)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTurno)
+							.addGap(11)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTurno)
+								.addComponent(txtTurno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(26)
 							.addComponent(lblMovimientos)
 							.addGap(18)
@@ -129,9 +149,21 @@ public class VentanaJuego extends JFrame {
 							.addGap(39)
 							.addComponent(btnMover)
 							.addGap(34)
-							.addComponent(btnSalir)))
-					.addContainerGap(138, Short.MAX_VALUE))
+							.addComponent(btnSalir))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addComponent(txtPosicionesPiezasBlancas, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)))
+					.addGap(245))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	private void realizarMovimiento() {
+	
+		
+		
+	}
+	public void mostrarPiezas(){
+		txtPosicionesPiezasBlancas.setText(p.mostrarPiezas("blanca"));
 	}
 }

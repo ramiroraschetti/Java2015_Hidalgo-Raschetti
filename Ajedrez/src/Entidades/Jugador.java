@@ -28,7 +28,6 @@ public class Jugador {
 	}
 	
 	public Jugador(int dni, String nombre, String apellido) {
-		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -36,6 +35,12 @@ public class Jugador {
 	
 	public Jugador (){
 		
+	}
+	public ArrayList<Partida> getPartidasPendientes() {
+		return partidasPendientes;
+	}
+	public void setPartidasPendientes(ArrayList<Partida> partidasPendientes) {
+		this.partidasPendientes = partidasPendientes;
 	}
 	
 	

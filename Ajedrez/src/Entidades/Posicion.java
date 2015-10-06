@@ -2,25 +2,25 @@ package Entidades;
 
 public class Posicion {
 	
-	private char posFila;
-	private int posColumna;
+	private char posColumna;
+	private int posFila;
 
 	public char getPosFila() {
-		return posFila;
-	}
-	public void setPosFila(char posFila) {
-		this.posFila = posFila;
-	}
-	public int getPosColumna() {
 		return posColumna;
 	}
+	public void setPosFila(char posFila) {
+		this.posColumna = posFila;
+	}
+	public int getPosColumna() {
+		return posFila;
+	}
 	public void setPosColumna(int posColumna) {
-		this.posColumna = posColumna;
+		this.posFila = posColumna;
 	}
 	
 	public Posicion(char posFila, int posColumna) {
-		this.posFila = posFila;
-		this.posColumna = posColumna;
+		this.posColumna = posFila;
+		this.posFila = posColumna;
 	}
 	public Posicion() {
 		

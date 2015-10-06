@@ -140,6 +140,7 @@ public class VentanaPrincipal extends JFrame {
 		if ( p != null){
 			VentanaJuego juego = new VentanaJuego();
 			juego.setP(p);
+			juego.setVisible(true);
 		}
 		
 	}

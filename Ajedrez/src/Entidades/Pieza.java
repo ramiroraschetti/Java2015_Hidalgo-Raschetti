@@ -8,6 +8,8 @@ public abstract class Pieza {
 	private Posicion posicion;
 	private Jugador jugador;
 	private boolean estadoPieza = true; //Si la pieza fue comida el estado es false, si esta en el tablero es true
+	private Partida partida;
+	private boolean fueMovida = false;
 	
 	public int getIdPieza() {
 		return idPieza;
@@ -49,6 +51,9 @@ public abstract class Pieza {
 	}
 	
 		
+
+	public abstract void moverPieza(char mueveX, int mueveY);
+	
 	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
 		 if (!(mueveX>='a' && mueveX<='h') || !(mueveY>=1 && mueveY<=8)) {
 	            throw new Exception("Pieza out of bound");
@@ -61,6 +66,17 @@ public abstract class Pieza {
 		 return true;
 	};
 	
-	public abstract void moverPieza(char mueveX, int mueveY);
+	public Partida getPartida() {
+		return partida;
+	}
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
+	public boolean isFueMovida() {
+		return fueMovida;
+	}
+	public void setFueMovida(boolean fueMovida) {
+		this.fueMovida = fueMovida;
+	}
 	
 }

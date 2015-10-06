@@ -15,19 +15,19 @@ public class CtrlJugar {
 //		piezasJuego = new Pieza[32];
 	}
 	
-	public Partida iniciarPartida(int dniJug1, int dniJug2) { //Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
+	public Partida iniciarPartida(int dni1, int dni2) { //Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
 		Partida p = new Partida();
-		if(catalogoPartida.estadoPartida(dniJug1, dniJug2) == false) //estadoPartdia devuelve false es que no hay partida iniciada
+		if(catalogoPartida.estadoPartida( dni1,  dni2) == false) //estadoPartdia devuelve false es que no hay partida iniciada
 			
-				p = catalogoPartida.partidaNueva(dniJug1, dniJug2);	//deben devolver de partidaNueva y retomarPArtida las
+				p = catalogoPartida.partidaNueva( dni1,  dni2);	//deben devolver de partidaNueva y retomarPArtida las
 			else																	// piezas de la partida  con su respectiva posicion
-				p = catalogoPartida.retomarPartida(dniJug1, dniJug2);
+				p = catalogoPartida.retomarPartida( dni1,  dni2);
 		return p;
 	}
 
-	public  void buscarOponente(int dniB) {   //busca partidas abiertas con otros oponentes
+	public  void buscarOponente(int dni) {   //busca partidas abiertas con otros oponentes
 		
-		catalogoPartida.busqueda(dniB);
+		catalogoPartida.busqueda(dni);
 	}
 	
 	public Pieza[] buscarPiezas(){				//busqueda de arreglo entero de piezas  ¿? nose para q todavia
