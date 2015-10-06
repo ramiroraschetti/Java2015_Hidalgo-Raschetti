@@ -16,7 +16,7 @@ public class DbPartidas {
 	
   private static ArrayList<Partida> colPartidas;
   private static ArrayList<Partida> colPartJugando;
-//private static Pieza[] piezasPartida; 
+
 
 	public DbPartidas(){
 		colPartidas = new ArrayList<Partida>();
@@ -172,33 +172,7 @@ public class DbPartidas {
 			
 		}
 
-	public Pieza[] getPiezas() {
-		Pieza[] piezas= new Pieza[32];
-		ResultSet rs=null;
-		Statement stmt=null;
-		
-		try {
-			stmt = 	FactoryConexion.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select * from pieza;");
-			int i=0;
-			while(rs.next()) {
-				Pieza p = null;
-				String nombrePieza = rs.getString(2);
-//				if(nombrePieza.equals("R")) p = new PiezaRey();
-//				if(nombrePieza.equals("D")) p = new PiezaReina();
-								
-				p.setIdPieza(rs.getInt(1));
-				p.setColor(rs.getString(3));
-				piezas[i]=p;
-				i++;
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		FactoryConexion.getInstancia().releaseConn();
-		return piezas;
-	}
+	
 
 	
 

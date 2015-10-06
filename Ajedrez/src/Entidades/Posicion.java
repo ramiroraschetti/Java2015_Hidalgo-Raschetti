@@ -20,11 +20,15 @@ public class Posicion {
 	public String toString(){
 		return  ""+this.getPosColumna()+this.getPosFila();
 	}
+	public void setterPosicion(String colfil){
+		this.posColumna= colfil.charAt(0);
+		this.posFila= Integer.valueOf(colfil.substring(1, 2));
+	}
 
 	
-	public Posicion(char posFila, int posColumna) {
-		this.posColumna = posFila;
-		this.posFila = posColumna;
+	public Posicion(char posColumna1, int posFila) {
+		this.posColumna = posColumna1;
+		this.posFila = posFila;
 	}
 	public Posicion() {
 		

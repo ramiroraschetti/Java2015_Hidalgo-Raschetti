@@ -3,7 +3,8 @@ package Entidades;
 public class PiezaAlfil extends Pieza {
 	
 	public PiezaAlfil(boolean fueMovida, String color, Partida partida, Posicion posicion){
-        setColor(color);
+        setNombre('A');
+		setColor(color);
         setPartida(partida);
         setPosicion(posicion);
         setFueMovida(fueMovida);

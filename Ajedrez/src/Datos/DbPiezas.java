@@ -3,14 +3,14 @@ package Datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import Entidades.*;
 
 public class DbPiezas{
 	
-	//Recuperar de la DB todas las piezas de la partida
-	public ArrayList<Pieza> buscarPiezas(int idPartida, String color){
+		public ArrayList<Pieza> buscarPiezas(int idPartida, String color){
 		ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 		
 		ResultSet rs=null;
@@ -53,7 +53,9 @@ public class DbPiezas{
 				}
 				p.setColor(rs.getString("color"));
 				p.setEstadoPieza(rs.getBoolean("estadoPieza"));
-			//	p.setNombre(rs.getString("nombre"));
+				p.setNombre(rs.getString("nombre").charAt(0));
+			//	p.setPosicion(rs.getString("posicion"));
+				
 				
 				piezas.add(p);
 			}
@@ -77,7 +79,7 @@ public class DbPiezas{
 	}
 	
 	
-	public void guardarPiezas(Pieza p, Partida partida){
+	public void guardarPiezas(Partida partida, Pieza p ){
 		
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
@@ -85,14 +87,47 @@ public class DbPiezas{
 		try {
 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into piezas(idPartida, nombre, color, estado, posicion values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS
-				   );
+					"insert into piezas(idPartida, nombre, color, estado, posicion, fueMovida values (?,?,?,?,?,?)");
 			
 			stmt.setInt(1, partida.getIdPartida());
-		//	stmt.setString(2, p.getNombre());
+			stmt.setString(2, String.valueOf(p.getNombre()));
 			stmt.setString(3, p.getColor());
 			stmt.setBoolean(4, p.isEstadoPieza());
-		//	stmt.setString(5, p.getPosicion());
+			stmt.setString(5,  p.getPosicion().toString());
+			stmt.setBoolean(6, p.isFueMovida());
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			
+			try {
+				if(rs!=null ) rs.close();
+				if(stmt != null) stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			FactoryConexion.getInstancia().releaseConn();
+		}
+	}
+
+	public void updatePieza(Pieza pieza, Partida partida){
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		
+		try {
+
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update piezas set estado=?, posicion=? where idPartida=?"
+				   );
+			
+			stmt.setBoolean(1, pieza.isEstadoPieza());
+			stmt.setString(5,  pieza.getPosicion().toString());
+			stmt.setInt(3, partida.getIdPartida());
+				
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -3,7 +3,8 @@ package Entidades;
 public class PiezaPeon extends Pieza {
 	
 	public PiezaPeon(boolean fueMovida, String color, Partida partida, Posicion posicion){
-        setColor(color);
+		setNombre('P');
+		setColor(color);
         setPartida(partida);
         setPosicion(posicion);
         setFueMovida(fueMovida);

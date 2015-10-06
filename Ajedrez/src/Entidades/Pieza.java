@@ -51,7 +51,7 @@ public abstract class Pieza {
 	}
 	
 	public String toString(){
-		return this.getNombre()+" "+this.getPosicion()+" ";
+		return "\n"+this.getNombre()+" "+this.getPosicion();
 	}
 
 	public abstract void moverPieza(char mueveX, int mueveY);

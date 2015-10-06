@@ -3,7 +3,8 @@ package Entidades;
 public class PiezaReina extends Pieza {
 	
 	public PiezaReina(boolean fueMovida, String color, Partida partida, Posicion posicion){
-        setColor(color);
+		setNombre('D');
+		setColor(color);
         setPartida(partida);
         setPosicion(posicion);
         setFueMovida(fueMovida);
