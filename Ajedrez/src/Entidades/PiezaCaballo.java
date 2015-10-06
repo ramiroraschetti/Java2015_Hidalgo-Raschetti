@@ -8,7 +8,9 @@ public class PiezaCaballo extends Pieza{
         setPosicion(posicion);
         setFueMovida(fueMovida);
     }
-	
+	public PiezaCaballo(){
+		
+	}
 	public boolean movimientoValido() {
 			
 		return false;

@@ -8,10 +8,14 @@ public class PiezaPeon extends Pieza {
         setPosicion(posicion);
         setFueMovida(fueMovida);
     }
+	public PiezaPeon(){
+		
+	}
 	
 	public boolean movimientoValido() {
 			
 		return false;
 	}
+	
 
 }

@@ -49,7 +49,7 @@ public class Partida {
 	}
 	
 	public Partida(){
-		
+		iniciarPiezas();
 	}
 	
 	
@@ -58,8 +58,10 @@ public class Partida {
 		this.jugador2=dni2;
 		this.turno="blanca";
 		this.estadoPartida=true;
+		iniciarPiezas();
+	}
+		public void iniciarPiezas(){
 		Posicion posicion;
-		
 		// inicializar el tablero
         posicion = new Posicion('a', 1);
         this.piezasPartida.add(new PiezaTorre(false, "blanca", this, posicion));
@@ -101,6 +103,7 @@ public class Partida {
             posicion = new Posicion(x, 7);
             this.piezasPartida.add(new PiezaPeon(false, "negra", this, posicion));
         }
+        
     }
 				
 	public String toString(){
@@ -159,19 +162,20 @@ public class Partida {
 			{
 				if(p.isEstadoPieza())
 					if(p.getColor().equals("blanca"))
-						texto =p.getNombre() + " " + p.getPosicion() + "\n";
+						texto= p.getNombre() +""+ p.getPosicion();						
 			}
 								}	
 		else{
 			for (Pieza p : piezasPartida) 
 		{
 			if(p.isEstadoPieza())
-				if(p.getColor().equals("blanca"))
-					texto = p.getNombre() + " " + p.getPosicion() + "\n";
+				if(p.getColor().equals("negra"))
+					 texto= p.getNombre() +""+ p.getPosicion();	
 		}
 		
 	}
 		return texto;
+
 	}
 	
 }

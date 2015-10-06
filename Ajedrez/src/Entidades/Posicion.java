@@ -17,6 +17,10 @@ public class Posicion {
 	public void setPosColumna(int posColumna) {
 		this.posFila = posColumna;
 	}
+	public String toString(){
+		return  ""+this.getPosColumna()+this.getPosFila();
+	}
+
 	
 	public Posicion(char posFila, int posColumna) {
 		this.posColumna = posFila;

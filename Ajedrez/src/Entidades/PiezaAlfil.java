@@ -8,6 +8,9 @@ public class PiezaAlfil extends Pieza {
         setPosicion(posicion);
         setFueMovida(fueMovida);
     }
+	public PiezaAlfil(){
+		
+	}
 	
 	public boolean movimientoValido() {
 			

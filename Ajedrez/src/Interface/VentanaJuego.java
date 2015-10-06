@@ -2,6 +2,7 @@ package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JList;
 
 public class VentanaJuego extends JFrame {
 
@@ -65,6 +67,7 @@ public class VentanaJuego extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		
 		JLabel lblPiezasBlancas = new JLabel("Piezas Blancas");
 		lblPiezasBlancas.setFont(new Font("Arial", Font.BOLD, 12));
 		
@@ -92,6 +95,8 @@ public class VentanaJuego extends JFrame {
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cargarTurno();
+				mostrarPiezas();
 			}
 		});
 		
@@ -102,6 +107,8 @@ public class VentanaJuego extends JFrame {
 		txtPosicionesPiezasBlancas = new JTextArea();
 		txtPosicionesPiezasBlancas.setEditable(false);
 		txtPosicionesPiezasBlancas.setRows(16);
+		
+
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -114,7 +121,8 @@ public class VentanaJuego extends JFrame {
 					.addGap(40)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(159)
+							
+							.addGap(68)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnSalir)
 								.addComponent(btnMover)
@@ -152,7 +160,9 @@ public class VentanaJuego extends JFrame {
 							.addComponent(btnSalir))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
-							.addComponent(txtPosicionesPiezasBlancas, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtPosicionesPiezasBlancas, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+								)))
 					.addGap(245))
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -161,9 +171,14 @@ public class VentanaJuego extends JFrame {
 	private void realizarMovimiento() {
 	
 		
-		
 	}
 	public void mostrarPiezas(){
+
 		txtPosicionesPiezasBlancas.setText(p.mostrarPiezas("blanca"));
+		
+		
+	}
+	public void cargarTurno() {
+		txtTurno.setText(p.getTurno());
 	}
 }

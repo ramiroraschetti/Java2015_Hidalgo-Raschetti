@@ -50,7 +50,9 @@ public abstract class Pieza {
 		this.estadoPieza = estadoPieza;
 	}
 	
-		
+	public String toString(){
+		return this.getNombre()+" "+this.getPosicion()+" ";
+	}
 
 	public abstract void moverPieza(char mueveX, int mueveY);
 	

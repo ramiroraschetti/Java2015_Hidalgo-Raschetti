@@ -17,11 +17,11 @@ public class CtrlJugar {
 	
 	public Partida iniciarPartida(int dni1, int dni2) { //Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
 		Partida p = new Partida();
-		if(catalogoPartida.estadoPartida( dni1,  dni2) == false) //estadoPartdia devuelve false es que no hay partida iniciada
-			
-				p = catalogoPartida.partidaNueva( dni1,  dni2);	//deben devolver de partidaNueva y retomarPArtida las
-			else																	// piezas de la partida  con su respectiva posicion
-				p = catalogoPartida.retomarPartida( dni1,  dni2);
+		if(catalogoPartida.estadoPartida( dni1,  dni2) == true) //estadoPartdia devuelve false es que no hay partida iniciada
+				
+					p = catalogoPartida.retomarPartida( dni1,  dni2);
+			else																	
+					p = catalogoPartida.partidaNueva( dni1,  dni2);	
 		return p;
 	}
 

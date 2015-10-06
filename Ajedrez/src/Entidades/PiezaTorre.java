@@ -9,6 +9,9 @@ public class PiezaTorre extends Pieza {
         setFueMovida(fueMovida);
     }
 	
+	public PiezaTorre(){
+		
+	}
 	public boolean movimientoValido() {
 		
 		return false;

@@ -8,6 +8,9 @@ public class PiezaRey extends Pieza {
         setPosicion(posicion);
         setFueMovida(fueMovida);
     }
+	public PiezaRey(){
+		
+	}
 
 	@Override
 	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
