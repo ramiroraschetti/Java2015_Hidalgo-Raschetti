@@ -1,6 +1,7 @@
 package Controlador;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Datos.DbPartidas;
@@ -23,10 +24,13 @@ public class CtrlJugar {
 	public Partida iniciarPartida(int dni1, int dni2) { 				//Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
 		Partida p = new Partida();
 		if(catalogoPartida.estadoPartida( dni1,  dni2) == true) //estadoPartdia devuelve true retoma partida iniciada
-				
+				{
 					p = catalogoPartida.retomarPartida( dni1,  dni2);
-			else																	
+
+				}
+			else	{																
 					p = catalogoPartida.partidaNueva( dni1,  dni2);	
+					catalogoPiezas.guardarPiezas(p);}
 		return p;
 	}
 
@@ -35,15 +39,15 @@ public class CtrlJugar {
 		catalogoPartida.busqueda(dni);
 	}
 	
-	public void guardarPiezas(Partida partida, Pieza pieza){										//Guarda todas las piezas
-		catalogoPiezas.guardarPiezas(partida, pieza);
+	public void guardarPiezas(Partida partida){										//Guarda todas las piezas
+		catalogoPiezas.guardarPiezas(partida);
 	}
 		
-	public ArrayList<Pieza> buscarPiezas(Partida partida, Pieza pieza){								//Busca Todas las Piezas
-		return catalogoPiezas.buscarPiezas(partida.getIdPartida(), pieza.getColor());
+	public ArrayList<Pieza> buscarPiezas(Partida partida) {								//Busca Todas las Piezas
+		return catalogoPiezas.buscarPiezas(partida.getIdPartida());
 	}
-	public void actualizarPieza(Pieza p, Partida part){												//Actualiza pos y estado de la pieza en la partida
-		catalogoPiezas.updatePieza(p, part);
+	public void actualizarPieza(Pieza p){												//Actualiza pos y estado de la pieza en la partida
+		catalogoPiezas.updatePieza(p);
 	}
 
 }

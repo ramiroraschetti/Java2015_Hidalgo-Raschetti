@@ -140,8 +140,12 @@ public class VentanaPrincipal extends JFrame {
 		if ( p != null){
 			VentanaJuego juego = new VentanaJuego();
 			juego.setP(p);
+			juego.mostrarPiezas();
+			juego.cargarTurno();
 			juego.setVisible(true);
-		}
+		}else
+			{
+			JOptionPane.showMessageDialog(this, "Jugadores no registrados");			}
 		
 	}
 	

@@ -5,17 +5,18 @@ public class Posicion {
 	private char posColumna;
 	private int posFila;
 
-	public char getPosFila() {
+
+	public char getPosColumna() {
 		return posColumna;
 	}
-	public void setPosFila(char posFila) {
-		this.posColumna = posFila;
+	public void setPosColumna(char posColumna) {
+		this.posColumna = posColumna;
 	}
-	public int getPosColumna() {
+	public int getPosFila() {
 		return posFila;
 	}
-	public void setPosColumna(int posColumna) {
-		this.posFila = posColumna;
+	public void setPosFila(int posFila) {
+		this.posFila = posFila;
 	}
 	public String toString(){
 		return  ""+this.getPosColumna()+this.getPosFila();
@@ -26,8 +27,8 @@ public class Posicion {
 	}
 
 	
-	public Posicion(char posColumna1, int posFila) {
-		this.posColumna = posColumna1;
+	public Posicion(char posColumna, int posFila) {
+		this.posColumna = posColumna;
 		this.posFila = posFila;
 	}
 	public Posicion() {

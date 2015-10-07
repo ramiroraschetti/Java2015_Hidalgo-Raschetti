@@ -51,7 +51,7 @@ public abstract class Pieza {
 	}
 	
 	public String toString(){
-		return "\n"+this.getNombre()+" "+this.getPosicion();
+		return "\n"+this.getNombre()+" "+this.getPosicion().getPosColumna()+this.getPosicion().getPosFila();
 	}
 
 	public abstract void moverPieza(char mueveX, int mueveY);
@@ -61,8 +61,8 @@ public abstract class Pieza {
 	            throw new Exception("Pieza out of bound");
 	        }
 		 
-		 char posX = getPosicion().getPosFila();
-	        int posY = getPosicion().getPosColumna();
+		 char posX = getPosicion().getPosColumna();							//VER CON KIKE!!!!!!!!
+	        int posY = getPosicion().getPosFila();
 	        if (posX == mueveX && posY == mueveY) throw new Exception("La pieza ya se encuentra en esa posicion");
 
 		 return true;

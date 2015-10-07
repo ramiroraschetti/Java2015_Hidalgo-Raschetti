@@ -25,6 +25,7 @@ import Entidades.Pieza;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -45,6 +46,9 @@ public class VentanaJuego extends JFrame {
 	private CtrlJugar ctrlJug = new CtrlJugar(); 
 
 	
+	public Partida getP() {
+		return p;
+	}
 	public void setP(Partida p){
 		this.p =p;
 		}
@@ -205,13 +209,25 @@ public class VentanaJuego extends JFrame {
 	}
 	
 	private void realizarMovimiento(Partida partida, Pieza pieza) {
-	ctrlJug.guardarPiezas(partida, pieza);
+	
 		
 	}
-	public void mostrarPiezas(){
-
-		txtPosicionesPiezasBlancas.setText(p.mostrarPiezas("blanca").toString());
-		txtPosicionesPiezasNegras.setText(p.mostrarPiezas("negra").toString());
+	public void mostrarPiezas() {
+		ArrayList<Pieza> listPiezas = new ArrayList<Pieza>();
+		ArrayList<Pieza> pieBlancas = new ArrayList<Pieza>();
+		ArrayList<Pieza> pieNegras = new ArrayList<Pieza>();
+		listPiezas = ctrlJug.buscarPiezas(p);
+				
+		for (Pieza a : listPiezas){
+			if("blanca".equals(a.getColor()))
+					pieBlancas.add(a);
+			else
+					pieNegras.add(a);}
+		txtPosicionesPiezasBlancas.setText(pieBlancas.toString());			
+		txtPosicionesPiezasNegras.setText(pieNegras.toString());
+		
+//		txtPosicionesPiezasBlancas.setText(p.mostrarPiezas("blanca").toString());
+//		txtPosicionesPiezasNegras.setText(p.mostrarPiezas("negra").toString());
 		
 	}
 	public void cargarTurno() {

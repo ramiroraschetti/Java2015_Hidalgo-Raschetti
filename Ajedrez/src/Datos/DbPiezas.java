@@ -10,19 +10,21 @@ import Entidades.*;
 
 public class DbPiezas{
 	
-		public ArrayList<Pieza> buscarPiezas(int idPartida, String color){
-		ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+	public ArrayList<Pieza> buscarPiezas(int idPartida){
 		
+		ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+		Posicion pos= null;
+		Pieza p= null;
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		try {
 			stmt = 	FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select nombre, color, estado, posicion from piezas where idPartida = ?, color = ?");
+					"select * from pieza where idPartida_Pieza = ? and estadoPieza = true");
 			stmt.setInt(1, idPartida);
-			stmt.setString(2, color);
+			
 			rs = stmt.executeQuery();
 			while(rs !=null && rs.next()){
-				Pieza p = null;
+				pos = new Posicion(rs.getString("posColumna").charAt(0), rs.getInt("posFila"));
 				switch (rs.getString("nombre")) {
 				case "P":
 					p = new PiezaPeon();					
@@ -51,11 +53,12 @@ public class DbPiezas{
 				default:
 					break;
 				}
+				p.setIdPieza(rs.getInt("idPieza"));
+				p.setNombre(rs.getString("nombre").charAt(0));
 				p.setColor(rs.getString("color"));
 				p.setEstadoPieza(rs.getBoolean("estadoPieza"));
-				p.setNombre(rs.getString("nombre").charAt(0));
-			//	p.setPosicion(rs.getString("posicion"));
-				
+				p.setFueMovida(rs.getBoolean("fueMovida"));
+				p.setPosicion(pos);
 				
 				piezas.add(p);
 			}
@@ -78,23 +81,29 @@ public class DbPiezas{
 		return piezas;
 	}
 	
-	
-	public void guardarPiezas(Partida partida, Pieza p ){
+	public void guardarPiezas(Partida partida){
 		
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
-		
+		ArrayList<Pieza> listapiezas = new ArrayList<Pieza>();
 		try {
 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into piezas(idPartida, nombre, color, estado, posicion, fueMovida values (?,?,?,?,?,?)");
-			
-			stmt.setInt(1, partida.getIdPartida());
-			stmt.setString(2, String.valueOf(p.getNombre()));
-			stmt.setString(3, p.getColor());
-			stmt.setBoolean(4, p.isEstadoPieza());
-			stmt.setString(5,  p.getPosicion().toString());
-			stmt.setBoolean(6, p.isFueMovida());
+					"insert into pieza (idPieza, nombre, color, posColumna, posFila, estadoPieza, fueMovida, idPartida_Pieza) values (0,?,?,?,?,?,?,?)");
+			listapiezas = partida.getPiezasPartida();
+			for(Pieza pie:listapiezas ){				
+				stmt.setString(1, String.valueOf(pie.getNombre()));
+				stmt.setString(2, pie.getColor());
+                stmt.setString(3, String.valueOf(pie.getPosicion().getPosColumna()));
+                stmt.setInt(4, pie.getPosicion().getPosFila());
+				stmt.setBoolean(5, pie.isEstadoPieza());
+				stmt.setBoolean(6, pie.isFueMovida());
+				stmt.setInt(7, partida.getIdPartida());
+				
+				//stmt.setString(5,  pie.getPosicion().toString());
+				//stmt.setBoolean(6, pie.isFueMovida());
+				stmt.execute();
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -114,19 +123,20 @@ public class DbPiezas{
 		}
 	}
 
-	public void updatePieza(Pieza pieza, Partida partida){
+	public void updatePieza(Pieza pieza){
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		
 		try {
 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update piezas set estado=?, posicion=? where idPartida=?"
+					"update pieza set  posColumna=?, posFila=?, estadoPieza=? where idPartida_Pieza=?"
 				   );
 			
-			stmt.setBoolean(1, pieza.isEstadoPieza());
-			stmt.setString(5,  pieza.getPosicion().toString());
-			stmt.setInt(3, partida.getIdPartida());
+			stmt.setString(1,  String.valueOf(pieza.getPosicion().getPosColumna()));
+			stmt.setInt(2, pieza.getPosicion().getPosFila());
+			stmt.setBoolean(3, pieza.isEstadoPieza());
+			stmt.setInt(4, pieza.getPartida().getIdPartida());
 				
 			
 		} catch (SQLException e) {
