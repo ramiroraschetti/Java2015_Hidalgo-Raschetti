@@ -18,16 +18,7 @@ public class PiezaAlfil extends Pieza {
 			return false;
 		}
 
-	public void moverPieza() {
-		// TODO Auto-generated method stub
-		
-		return false;
-	}
 
-	@Override
-	public void moverPieza(char mueveX, int mueveY) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

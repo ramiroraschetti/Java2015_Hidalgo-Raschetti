@@ -172,6 +172,38 @@ public class DbPartidas {
 			
 		}
 
+	public void updatePartida(Partida partida){ 
+		ResultSet rs=null;
+		PreparedStatement stmt=null;
+		
+		try {
+
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update partida set  estadoPartida=?, turno=?  where idPartida=?"
+				   );
+			stmt.setBoolean(1, partida.isEstadoPartida());
+			stmt.setString(2, partida.getTurno());
+			stmt.setInt(3, partida.getIdPartida());
+
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			
+			try {
+				if(rs!=null ) rs.close();
+				if(stmt != null) stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			FactoryConexion.getInstancia().releaseConn();
+		}
+	}
 	
 
 	

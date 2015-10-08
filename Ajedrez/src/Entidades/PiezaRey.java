@@ -17,17 +17,16 @@ public class PiezaRey extends Pieza {
 	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
 		 super.movimientoValido(mueveX, mueveY, movimientoCome);
 		 
-		 char posFila = this.getPosicion().getPosFila();
-		 int posColumna = this.getPosicion().getPosColumna();
+		 int posFila = this.getPosicion().getPosFila();
+		 char posColumna = this.getPosicion().getPosColumna();
 		 
-		 if((mueveX - posFila == 1 && mueveY - posColumna == 1) || (mueveX - posFila == 0 && mueveY - posColumna == 1) || 
-				 (mueveX - posFila == 1 && mueveY - posColumna == 0)) {
-			 return true;
+		 
+		 if((mueveX - posColumna == 1 && mueveY - posFila == 1) || (mueveX - posColumna == 0 && mueveY - posFila == 1) || 
+				 (mueveX - posColumna == 1 && mueveY - posFila == 0)) {
 		 } else {
 			 throw new Exception ("Movimiento invalido");
 		 }
+		return true;
 	}
 	
-	
-
 }

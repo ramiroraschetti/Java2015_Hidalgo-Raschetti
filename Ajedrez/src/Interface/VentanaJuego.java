@@ -98,8 +98,9 @@ public class VentanaJuego extends JFrame {
 		
 		JButton btnMover = new JButton("MOVER");
 		btnMover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				realizarMovimiento(p, pieza);
+			public void actionPerformed(ActionEvent arg0) {//Validar que se pueda hacer el movimiento y actualizar turno y piezas/posicion
+				realizarMovimiento();		//Abajo esta el metodo Kike
+				update();
 				cargarTurno();
 				mostrarPiezas();
 				limpiar();
@@ -208,16 +209,31 @@ public class VentanaJuego extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	private void realizarMovimiento(Partida partida, Pieza pieza) {
+
 	
+	private void realizarMovimiento() {
+		try {
+			p.moverPieza( textField_Origen.getText().charAt(0), Integer.valueOf(textField_Origen.getText().charAt(1)), 
+					     textField_Destino.getText().charAt(0), Integer.valueOf(textField_Destino.getText().charAt(1)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	private void update(){ //Preguntar si se termina la partida al comer rey
+		ctrlJug.actualizarPartida(p);
+		ctrlJug.actualizarPieza(p);
 		
 	}
+	
 	public void mostrarPiezas() {
 		ArrayList<Pieza> listPiezas = new ArrayList<Pieza>();
 		ArrayList<Pieza> pieBlancas = new ArrayList<Pieza>();
 		ArrayList<Pieza> pieNegras = new ArrayList<Pieza>();
 		listPiezas = ctrlJug.buscarPiezas(p);
-				
+		p.setPiezasPartida(listPiezas);
+		
 		for (Pieza a : listPiezas){
 			if("blanca".equals(a.getColor()))
 					pieBlancas.add(a);
@@ -226,9 +242,7 @@ public class VentanaJuego extends JFrame {
 		txtPosicionesPiezasBlancas.setText(pieBlancas.toString());			
 		txtPosicionesPiezasNegras.setText(pieNegras.toString());
 		
-//		txtPosicionesPiezasBlancas.setText(p.mostrarPiezas("blanca").toString());
-//		txtPosicionesPiezasNegras.setText(p.mostrarPiezas("negra").toString());
-		
+	
 	}
 	public void cargarTurno() {
 		txtTurno.setText(p.getTurno());

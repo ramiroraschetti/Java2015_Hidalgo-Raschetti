@@ -19,12 +19,9 @@ public class Posicion {
 		this.posFila = posFila;
 	}
 	public String toString(){
-		return  ""+this.getPosColumna()+this.getPosFila();
+		return  String.valueOf(this.getPosColumna()+this.getPosFila());
 	}
-	public void setterPosicion(String colfil){
-		this.posColumna= colfil.charAt(0);
-		this.posFila= Integer.valueOf(colfil.substring(1, 2));
-	}
+
 
 	
 	public Posicion(char posColumna, int posFila) {

@@ -24,6 +24,7 @@ public class DbPiezas{
 			
 			rs = stmt.executeQuery();
 			while(rs !=null && rs.next()){
+				
 				pos = new Posicion(rs.getString("posColumna").charAt(0), rs.getInt("posFila"));
 				switch (rs.getString("nombre")) {
 				case "P":
@@ -100,8 +101,6 @@ public class DbPiezas{
 				stmt.setBoolean(6, pie.isFueMovida());
 				stmt.setInt(7, partida.getIdPartida());
 				
-				//stmt.setString(5,  pie.getPosicion().toString());
-				//stmt.setBoolean(6, pie.isFueMovida());
 				stmt.execute();
 			}
 			
@@ -122,21 +121,27 @@ public class DbPiezas{
 			FactoryConexion.getInstancia().releaseConn();
 		}
 	}
+					
 
-	public void updatePieza(Pieza pieza){
+	
+	public void updatePiezas(Partida partida){ 
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
-		
+		ArrayList<Pieza> listapiezas = new ArrayList<Pieza>();
 		try {
 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update pieza set  posColumna=?, posFila=?, estadoPieza=? where idPartida_Pieza=?"
+					"update pieza set  posColumna=?, posFila=?, estadoPieza=?, fueMovida=?  where idPartida_Pieza=?"
 				   );
-			
-			stmt.setString(1,  String.valueOf(pieza.getPosicion().getPosColumna()));
-			stmt.setInt(2, pieza.getPosicion().getPosFila());
-			stmt.setBoolean(3, pieza.isEstadoPieza());
-			stmt.setInt(4, pieza.getPartida().getIdPartida());
+			listapiezas = partida.getPiezasPartida();
+			for(Pieza pie:listapiezas ){				
+                stmt.setString(1, String.valueOf(pie.getPosicion().getPosColumna()));
+                stmt.setInt(2, pie.getPosicion().getPosFila());
+				stmt.setBoolean(3, pie.isEstadoPieza());
+				stmt.setBoolean(4, pie.isFueMovida());
+				stmt.setInt(5, partida.getIdPartida());
+				stmt.execute();
+			}
 				
 			
 		} catch (SQLException e) {

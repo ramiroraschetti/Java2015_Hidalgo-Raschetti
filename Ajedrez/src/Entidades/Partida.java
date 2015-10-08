@@ -123,13 +123,13 @@ public class Partida {
 		Posicion posicion = new Posicion(posX, posY);
 		Posicion posicionHacia = new Posicion(mueveX, mueveY);
 		Pieza piezaElegida = null;
-		Pieza piezaAComer;
+		Pieza piezaAComer = null;
 		boolean movimientoCome = false;
 		
 		//Buscamos la pieza a mover, la pieza a comer, y validamos que no este ocupada por una del mismo color
 		for(Pieza pieza : getPiezasPartida()){
 			if(pieza.isEstadoPieza() == true){
-				if(posicion.equals(pieza.getPosicion())){
+				if(posicion.equals(pieza.getPosicion()) && this.getTurno().equals(pieza.getColor())){
 					piezaElegida = pieza;
 				} 
 				if(posicionHacia.equals(pieza.getPosicion())){
@@ -149,12 +149,16 @@ public class Partida {
 		
 		
 		if(piezaElegida.movimientoValido(mueveX, mueveY, movimientoCome)){
-			//TODO: validacion x pieza 
+			if(piezaAComer != null){
+				piezaAComer.setEstadoPieza(false);
+			}
+			piezaElegida.setPosicion(posicionHacia);
+			this.cambiarTurno();
 		};
 		
 		//TODO: cambiar el estado de la pieza comida, sacarla del juego, cambiar de turnoss
 	}
-	
+
 //	public ArrayList<Pieza> mostrarPiezas(String color) {
 //		ArrayList<Pieza> lista = new ArrayList<Pieza>();
 //		if(color.equals("blanca")){

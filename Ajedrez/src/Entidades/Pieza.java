@@ -26,22 +26,20 @@ public abstract class Pieza {
 	public String getColor() {
 		return color;
 	}
-	
+	public void setColor(String color) {
+		this.color = color;
+	}
 	public Posicion getPosicion() {
 		return posicion;
 	}
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-	
 	public Jugador getJugador() {
 		return jugador;
 	}
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
-	}
-	public void setColor(String color) {
-		this.color = color;
 	}
 	public boolean isEstadoPieza() {
 		return estadoPieza;
@@ -49,25 +47,6 @@ public abstract class Pieza {
 	public void setEstadoPieza(boolean estadoPieza) {
 		this.estadoPieza = estadoPieza;
 	}
-	
-	public String toString(){
-		return "\n"+this.getNombre()+" "+this.getPosicion().getPosColumna()+this.getPosicion().getPosFila();
-	}
-
-	public abstract void moverPieza(char mueveX, int mueveY);
-	
-	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
-		 if (!(mueveX>='a' && mueveX<='h') || !(mueveY>=1 && mueveY<=8)) {
-	            throw new Exception("Pieza out of bound");
-	        }
-		 
-		 char posX = getPosicion().getPosColumna();							//VER CON KIKE!!!!!!!!
-	        int posY = getPosicion().getPosFila();
-	        if (posX == mueveX && posY == mueveY) throw new Exception("La pieza ya se encuentra en esa posicion");
-
-		 return true;
-	};
-	
 	public Partida getPartida() {
 		return partida;
 	}
@@ -81,4 +60,24 @@ public abstract class Pieza {
 		this.fueMovida = fueMovida;
 	}
 	
+	public String toString(){
+		return "\n"+this.getNombre()+" "+this.getPosicion().getPosColumna()+this.getPosicion().getPosFila();
+	}
+
+
+	
+	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
+		 if (!(mueveX>='a' && mueveX<='h') || !(mueveY>=1 && mueveY<=8)) {
+	            throw new Exception("Pieza out of bound");
+	        }
+		 
+		 char posX = getPosicion().getPosColumna();							
+	        int posY = getPosicion().getPosFila();
+	        if (posX == mueveX && posY == mueveY) throw new Exception("La pieza ya se encuentra en esa posicion");
+	        
+	        return true;
+
+	};
+	
+
 }
