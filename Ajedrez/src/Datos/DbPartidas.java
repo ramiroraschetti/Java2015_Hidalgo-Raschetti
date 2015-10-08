@@ -14,12 +14,11 @@ import Entidades.PiezaRey;
 
 public class DbPartidas {
 	
-  private static ArrayList<Partida> colPartidas;
-  private static ArrayList<Partida> colPartJugando;
+   private static ArrayList<Partida> colPartJugando;
 
 
 	public DbPartidas(){
-		colPartidas = new ArrayList<Partida>();
+		
 		colPartJugando = new ArrayList<Partida>();
 	}
 	
@@ -172,7 +171,7 @@ public class DbPartidas {
 			
 		}
 
-	public void updatePartida(Partida partida){ 
+	public void updatePartida(Partida partida){ 	//Actualiza turno y estadorPartida de la partida
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		
@@ -184,7 +183,7 @@ public class DbPartidas {
 			stmt.setBoolean(1, partida.isEstadoPartida());
 			stmt.setString(2, partida.getTurno());
 			stmt.setInt(3, partida.getIdPartida());
-
+			stmt.execute();
 				
 			
 		} catch (SQLException e) {

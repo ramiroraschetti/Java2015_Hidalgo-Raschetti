@@ -44,7 +44,7 @@ public class CtrlJugar {
 	}
 		
 	public ArrayList<Pieza> buscarPiezas(Partida partida) {								//Busca Todas las Piezas
-		return catalogoPiezas.buscarPiezas(partida.getIdPartida());
+		return catalogoPiezas.buscarPiezas(partida);
 	}
 	public void actualizarPieza(Partida par){			    //Actualiza pos,estado de las piezas en la partida 
 		catalogoPiezas.updatePiezas(par);

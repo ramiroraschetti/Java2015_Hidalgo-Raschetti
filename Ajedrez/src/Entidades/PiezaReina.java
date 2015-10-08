@@ -17,8 +17,8 @@ public class PiezaReina extends Pieza {
 	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
 		 super.movimientoValido(mueveX, mueveY, movimientoCome);
 		 
-		 char posFila = this.getPosicion().getPosFila();
-		 int posColumna = this.getPosicion().getPosColumna();
+		 int posFila = this.getPosicion().getPosFila();
+		 char posColumna = this.getPosicion().getPosColumna();
 		return false;
 	}
 

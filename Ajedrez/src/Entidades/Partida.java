@@ -120,8 +120,8 @@ public class Partida {
 	
 
 	public void moverPieza(char mueveX, int mueveY, char posX, int posY) throws Exception {
-		Posicion posicion = new Posicion(posX, posY);
-		Posicion posicionHacia = new Posicion(mueveX, mueveY);
+		Posicion posicion = new Posicion(mueveX, mueveY);
+		Posicion posicionHacia = new Posicion(posX, posY); 
 		Pieza piezaElegida = null;
 		Pieza piezaAComer = null;
 		boolean movimientoCome = false;
@@ -129,7 +129,8 @@ public class Partida {
 		//Buscamos la pieza a mover, la pieza a comer, y validamos que no este ocupada por una del mismo color
 		for(Pieza pieza : getPiezasPartida()){
 			if(pieza.isEstadoPieza() == true){
-				if(posicion.equals(pieza.getPosicion()) && this.getTurno().equals(pieza.getColor())){
+				if(pieza.getPosicion().equals(posicion) && this.getTurno().equals(pieza.getColor())){
+					//IF NO ESTA FUNCIONANDO, TOMA COMO FALSA LA PRIMERA CONDICION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 					piezaElegida = pieza;
 				} 
 				if(posicionHacia.equals(pieza.getPosicion())){

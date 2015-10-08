@@ -213,8 +213,9 @@ public class VentanaJuego extends JFrame {
 	
 	private void realizarMovimiento() {
 		try {
-			p.moverPieza( textField_Origen.getText().charAt(0), Integer.valueOf(textField_Origen.getText().charAt(1)), 
-					     textField_Destino.getText().charAt(0), Integer.valueOf(textField_Destino.getText().charAt(1)));
+			
+			p.moverPieza( textField_Origen.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Origen.getText().charAt(1))), 
+					     textField_Destino.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Destino.getText().charAt(1))));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,8 +223,9 @@ public class VentanaJuego extends JFrame {
 
 	}
 	private void update(){ //Preguntar si se termina la partida al comer rey
-		ctrlJug.actualizarPartida(p);
 		ctrlJug.actualizarPieza(p);
+		ctrlJug.actualizarPartida(p);
+		
 		
 	}
 	
