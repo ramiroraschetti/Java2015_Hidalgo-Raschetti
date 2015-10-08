@@ -21,7 +21,7 @@ public class CtrlJugar {
 
 	}
 	
-	public Partida iniciarPartida(int dni1, int dni2) { 				//Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
+	public Partida iniciarPartida(int dni1, int dni2) { 		//Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
 		Partida p = new Partida();
 		if(catalogoPartida.estadoPartida( dni1,  dni2) == true) //estadoPartdia devuelve true retoma partida iniciada
 				{
@@ -34,7 +34,7 @@ public class CtrlJugar {
 		return p;
 	}
 
-	public  void buscarOponente(int dni) {  														 //busca partidas abiertas con otros oponentes
+	public  void buscarOponente(int dni) {  							 			 //busca partidas abiertas con otros oponentes
 		
 		catalogoPartida.busqueda(dni);
 	}

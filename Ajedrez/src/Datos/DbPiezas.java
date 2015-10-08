@@ -131,20 +131,34 @@ public class DbPiezas{
 		ArrayList<Pieza> listapiezas = new ArrayList<Pieza>();
 		try {
 
+//			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+//					"update pieza set idPieza=?, posColumna=?, posFila=?, estadoPieza=?, fueMovida=?  where idPartida_Pieza=?"
+//				   );
+//			listapiezas = partida.getPiezasPartida();
+//		
+//			for(Pieza pie:listapiezas ){				
+//				stmt.setInt(1, pie.getIdPieza());
+//                stmt.setString(2, String.valueOf(pie.getPosicion().getPosColumna()));
+//                stmt.setInt(3, pie.getPosicion().getPosFila());
+//				stmt.setBoolean(4, pie.isEstadoPieza());
+//				stmt.setBoolean(5, pie.isFueMovida());
+//				stmt.setInt(6, partida.getIdPartida());
+//				stmt.execute();
+//			}
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update pieza set  idPieza=?, posColumna=?, posFila=?, estadoPieza=?, fueMovida=?  where idPartida_Pieza=?"
+					"update pieza set posColumna=?, posFila=?, estadoPieza=?, fueMovida=?  where idPieza=?"
 				   );
 			listapiezas = partida.getPiezasPartida();
 		
 			for(Pieza pie:listapiezas ){				
-				stmt.setInt(1, pie.getIdPieza());
-                stmt.setString(2, String.valueOf(pie.getPosicion().getPosColumna()));
-                stmt.setInt(3, pie.getPosicion().getPosFila());
-				stmt.setBoolean(4, pie.isEstadoPieza());
-				stmt.setBoolean(5, pie.isFueMovida());
-				stmt.setInt(6, partida.getIdPartida());
+                stmt.setString(1, String.valueOf(pie.getPosicion().getPosColumna()));
+                stmt.setInt(2, pie.getPosicion().getPosFila());
+				stmt.setBoolean(3, pie.isEstadoPieza());
+				stmt.setBoolean(4, pie.isFueMovida());
+				stmt.setInt(5, pie.getIdPieza());
 				stmt.execute();
 			}
+
 				
 			
 		} catch (SQLException e) {

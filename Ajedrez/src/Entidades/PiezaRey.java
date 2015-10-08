@@ -21,8 +21,8 @@ public class PiezaRey extends Pieza {
 		 char posColumna = this.getPosicion().getPosColumna();
 		 
 		 
-		 if((mueveX - posColumna == 1 && mueveY - posFila == 1) || (mueveX - posColumna == 0 && mueveY - posFila == 1) || 
-				 (mueveX - posColumna == 1 && mueveY - posFila == 0)) {
+		 if((Math.abs(mueveX - posColumna) == 1 && Math.abs(mueveY - posFila) == 1) || (Math.abs(mueveX - posColumna) == 0 && Math.abs(mueveY - posFila) == 1) || 
+				 (Math.abs(mueveX - posColumna) == 1 && Math.abs(mueveY - posFila) == 0)) {
 		 } else {
 			 throw new Exception ("Movimiento invalido");
 		 }

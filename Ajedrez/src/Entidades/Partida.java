@@ -60,7 +60,7 @@ public class Partida {
 		this.estadoPartida=true;
 		iniciarPiezas();
 	}
-		public void iniciarPiezas(){
+	public void iniciarPiezas(){
 		Posicion posicion;
 		// inicializar el tablero
         posicion = new Posicion('a', 1);
@@ -119,9 +119,9 @@ public class Partida {
 	
 	
 
-	public void moverPieza(char mueveX, int mueveY, char posX, int posY) throws Exception {
-		Posicion posicion = new Posicion(mueveX, mueveY);
-		Posicion posicionHacia = new Posicion(posX, posY); 
+	public void moverPieza(char mueveX, int mueveY, char posX, int posY) throws Exception { //mueve destino - pos origen ?
+		Posicion posicion = new Posicion(posX, posY);
+		Posicion posicionHacia = new  Posicion(mueveX, mueveY);
 		Pieza piezaElegida = null;
 		Pieza piezaAComer = null;
 		boolean movimientoCome = false;
@@ -129,11 +129,11 @@ public class Partida {
 		//Buscamos la pieza a mover, la pieza a comer, y validamos que no este ocupada por una del mismo color
 		for(Pieza pieza : getPiezasPartida()){
 			if(pieza.isEstadoPieza() == true){
-				if(pieza.getPosicion().equals(posicion) && this.getTurno().equals(pieza.getColor())){
-					//IF NO ESTA FUNCIONANDO, TOMA COMO FALSA LA PRIMERA CONDICION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+				if(pieza.getPosicion().getPosColumna() == (posicion.getPosColumna()) && (pieza.getPosicion().getPosFila() == posicion.getPosFila())
+						&& this.getTurno().equals(pieza.getColor())){
 					piezaElegida = pieza;
 				} 
-				if(posicionHacia.equals(pieza.getPosicion())){
+				if(posicionHacia.getPosColumna() == (pieza.getPosicion().getPosColumna()) && posicionHacia.getPosFila() == pieza.getPosicion().getPosFila()){
 					if(pieza.getColor().equals(getTurno())){
 						throw new Exception("La posicion a mover se encuentra ocupada por una pieza del mismo color");
 					} else {
@@ -145,16 +145,20 @@ public class Partida {
 		}
 		
 		if(piezaElegida == null){
-			throw new Exception("No hay pieza en la posicion Origen");
+			throw new Exception("No hay pieza de tu color en la posicion Origen");
 		}
 		
 		
 		if(piezaElegida.movimientoValido(mueveX, mueveY, movimientoCome)){
 			if(piezaAComer != null){
 				piezaAComer.setEstadoPieza(false);
+				if(piezaAComer.getNombre() == 'R'){
+					this.setEstadoPartida(false);
+				}
 			}
 			piezaElegida.setPosicion(posicionHacia);
 			this.cambiarTurno();
+			
 		};
 		
 		//TODO: cambiar el estado de la pieza comida, sacarla del juego, cambiar de turnoss

@@ -36,8 +36,7 @@ import javax.swing.SwingConstants;
 public class VentanaJuego extends JFrame {
 
 	private JPanel contentPane;
-	private Partida p;
-	private Pieza pieza;
+	private Partida partidaEnJuego;
 	private JTextField txtTurno;
 	private JTextField textField_Origen;
 	private JTextField textField_Destino;
@@ -47,10 +46,10 @@ public class VentanaJuego extends JFrame {
 
 	
 	public Partida getP() {
-		return p;
+		return partidaEnJuego;
 	}
 	public void setP(Partida p){
-		this.p =p;
+		this.partidaEnJuego =p;
 		}
 	/**
 	 * Launch the application.
@@ -99,16 +98,19 @@ public class VentanaJuego extends JFrame {
 		JButton btnMover = new JButton("MOVER");
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {//Validar que se pueda hacer el movimiento y actualizar turno y piezas/posicion
-				realizarMovimiento();		//Abajo esta el metodo Kike
-				update();
-				cargarTurno();
-				mostrarPiezas();
-				limpiar();
+				try {
+					realizarMovimiento();		
+					update();
+					cargarTurno();
+					mostrarPiezas();
+					limpiar();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			
-
-			
+						
 		});
 		
 		JButton btnSalir = new JButton("SALIR");
@@ -214,8 +216,9 @@ public class VentanaJuego extends JFrame {
 	private void realizarMovimiento() {
 		try {
 			
-			p.moverPieza( textField_Origen.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Origen.getText().charAt(1))), 
-					     textField_Destino.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Destino.getText().charAt(1))));
+			partidaEnJuego.moverPieza( textField_Destino.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Destino.getText().charAt(1))),
+					textField_Origen.getText().charAt(0), Integer.parseInt(String.valueOf(textField_Origen.getText().charAt(1))) 
+					     );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -223,8 +226,8 @@ public class VentanaJuego extends JFrame {
 
 	}
 	private void update(){ //Preguntar si se termina la partida al comer rey
-		ctrlJug.actualizarPieza(p);
-		ctrlJug.actualizarPartida(p);
+		ctrlJug.actualizarPieza(partidaEnJuego);
+		ctrlJug.actualizarPartida(partidaEnJuego);
 		
 		
 	}
@@ -233,8 +236,8 @@ public class VentanaJuego extends JFrame {
 		ArrayList<Pieza> listPiezas = new ArrayList<Pieza>();
 		ArrayList<Pieza> pieBlancas = new ArrayList<Pieza>();
 		ArrayList<Pieza> pieNegras = new ArrayList<Pieza>();
-		listPiezas = ctrlJug.buscarPiezas(p);
-		p.setPiezasPartida(listPiezas);
+		listPiezas = ctrlJug.buscarPiezas(partidaEnJuego);
+		partidaEnJuego.setPiezasPartida(listPiezas);
 		
 		for (Pieza a : listPiezas){
 			if("blanca".equals(a.getColor()))
@@ -247,7 +250,7 @@ public class VentanaJuego extends JFrame {
 	
 	}
 	public void cargarTurno() {
-		txtTurno.setText(p.getTurno());
+		txtTurno.setText(partidaEnJuego.getTurno());
 	}
 	private void limpiar() {
 		textField_Origen.setText("");

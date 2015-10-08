@@ -19,6 +19,14 @@ public class PiezaReina extends Pieza {
 		 
 		 int posFila = this.getPosicion().getPosFila();
 		 char posColumna = this.getPosicion().getPosColumna();
+	
+		if(mueveX - posColumna == mueveY - posFila){
+			return true;
+		}
+		
+		if((Math.abs(mueveX - posColumna) != 0 && Math.abs(mueveY - posFila) == 0) || (Math.abs(mueveX - posColumna) == 0 && Math.abs(mueveY - posFila) != 0)) {
+			return true;
+		}
 		return false;
 	}
 
