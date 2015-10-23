@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Entidades.Jugador;
 import Entidades.Partida;
 import Entidades.Pieza;
 import Entidades.PiezaReina;
@@ -22,7 +23,7 @@ public class DbPartidas {
 		colPartJugando = new ArrayList<Partida>();
 	}
 	
-	public Partida partidaNueva(int dni1, int dni2){  //iniciar partida nueva entre 2 jugadores
+	public Partida partidaNueva(Jugador dni1, Jugador dni2){  //iniciar partida nueva entre 2 jugadores
 		//crear la partida nueva con los datos, asignar fichas y hay q devolver la partida entera
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
@@ -31,8 +32,8 @@ public class DbPartidas {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"insert into partida(idPartida, jugador1, jugador2, turno, estadoPartida) values (0,?,?,?,? )", PreparedStatement.RETURN_GENERATED_KEYS
 					);
-			stmt.setInt(1, p.getJugador1());
-			stmt.setInt(2, p.getJugador2());
+			stmt.setInt(1, p.getJugador1().getDni());
+			stmt.setInt(2, p.getJugador2().getDni());
 			stmt.setString(3, p.getTurno());
 			stmt.setBoolean(4, p.isEstadoPartida());
 			stmt.execute();
@@ -64,15 +65,15 @@ public class DbPartidas {
 		return p;
 	}
 	
-	public boolean estadoPartida(int dni1, int dni2) {  //Devolver si la partida esta finalizaza(False) o en juego(true)
+	public boolean estadoPartida(Jugador dni1, Jugador dni2) {  //Devolver si la partida esta finalizaza(False) o en juego(true)
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		Partida p = null ;
 		try {
 			stmt = 	FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select idPartida, jugador1, jugador2, turno, estadoPartida from partida where (jugador1=? and jugador2=?) and estadoPartida=true");
-			stmt.setInt(1, dni1);
-			stmt.setInt(2, dni2);
+			stmt.setInt(1, dni1.getDni());
+			stmt.setInt(2, dni2.getDni());
 			rs = stmt.executeQuery();															
 			if(rs !=null && rs.next()){
 				p=new Partida();
@@ -100,21 +101,21 @@ public class DbPartidas {
 				return false;
 	}
 	
-	public Partida retomarPartida(int dni1, int dni2) { //buscar la partida empezada y devolverlas completa con las //Piezas de la partida en estado true
+	public Partida retomarPartida(Jugador dni1, Jugador dni2) { //buscar la partida empezada y devolverlas completa con las //Piezas de la partida en estado true
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		Partida p = null ;
 		try {
 			stmt = 	FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select idPartida, jugador1, jugador2, turno, estadoPartida from partida where jugador1=? and jugador2=? and estadoPartida=true");
-			stmt.setInt(1, dni1);
-			stmt.setInt(2, dni2);
+			stmt.setInt(1, dni1.getDni());
+			stmt.setInt(2, dni2.getDni());
 			rs = stmt.executeQuery();															
 			if(rs !=null && rs.next()){
 				p=new Partida();
 				p.setIdPartida(rs.getInt("idPartida"));
-				p.setJugador1(rs.getInt("jugador1"));
-				p.setJugador2(rs.getInt("jugador2"));
+				p.setJugador1(dni1); //se setea el jugador sin el nombre, habria q hacer inner con clase jugador para traer el noombre
+				p.setJugador2(dni2);
 				p.setTurno(rs.getString("turno"));
 				p.setEstadoPartida(rs.getBoolean("estadoPartida"));
 								
@@ -142,14 +143,17 @@ public class DbPartidas {
 		ResultSet rs=null;
 		Statement stmt=null;
 		Partida p=null;
+		Jugador j1, j2 = null;
 		try {
 			stmt = 	FactoryConexion.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("select idPartida, jugador1, jugador2 from partida where ((jugador1="+dni+") or (jugador2 = "+dni+")) and estadoPartida = true;");
 			while(rs !=null && rs.next()){
 				p=new Partida();
+				j1=new Jugador(rs.getInt("jugador1"));
+				j2=new Jugador(rs.getInt("jugador2"));
 				p.setIdPartida(rs.getInt("idPartida"));
-				p.setJugador1(rs.getInt("jugador1"));
-				p.setJugador2(rs.getInt("jugador2"));
+				p.setJugador1(j1);
+				p.setJugador2(j2);
 				colPartJugando.add(p);
 			}
 			System.out.println(colPartJugando);

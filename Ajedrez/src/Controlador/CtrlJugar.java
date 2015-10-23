@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import Datos.DbPartidas;
 import Datos.DbPiezas;
+import Entidades.Jugador;
 import Entidades.Partida;
 import Entidades.Pieza;
 
@@ -21,7 +22,7 @@ public class CtrlJugar {
 
 	}
 	
-	public Partida iniciarPartida(int dni1, int dni2) { 		//Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
+	public Partida iniciarPartida(Jugador dni1, Jugador dni2) { 		//Iniciar partida nueva si no hay partida abierta, si no retomar partida abierta
 		Partida p = new Partida();
 		if(catalogoPartida.estadoPartida( dni1,  dni2) == true) //estadoPartdia devuelve true retoma partida iniciada
 				{

@@ -116,7 +116,8 @@ public class VentanaJuego extends JFrame {
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				//System.exit(0);
+				salir();
 				
 			}
 		});
@@ -256,5 +257,10 @@ public class VentanaJuego extends JFrame {
 		textField_Origen.setText("");
 		textField_Destino.setText("");
 		
+	}
+	private void salir(){
+		this.setVisible(false);
+		VentanaPrincipal inicio = new VentanaPrincipal();
+		inicio.setVisible(true);
 	}
 }

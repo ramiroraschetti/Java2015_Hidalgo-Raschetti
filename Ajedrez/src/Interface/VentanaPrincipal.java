@@ -30,7 +30,9 @@ import javax.swing.JTextArea;
 
 
 
+
 import Controlador.CtrlJugar;
+import Entidades.Jugador;
 import Entidades.Partida;
 import Entidades.Pieza;
 
@@ -65,7 +67,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		setTitle("Ajedrez - Ventana Inicio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 330, 141);
+		setBounds(100, 100, 393, 135);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,27 +96,39 @@ public class VentanaPrincipal extends JFrame {
 				busquedaPartida();
 			}
 		});
+		
+		JButton btnCrearJugador = new JButton("Crear Jugador");
+		btnCrearJugador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				crearJugador();
+			}
+
+			
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblJugador1)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(textDni_Jug2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-								.addComponent(textDni_Jug1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(18)
-									.addComponent(btnBuscarOponente))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(45)
-									.addComponent(btnNewButton))))
-						.addComponent(lblJugador2))
-					.addContainerGap(165, Short.MAX_VALUE))
+							.addComponent(textDni_Jug1, 0, 0, Short.MAX_VALUE))
+						.addComponent(btnBuscarOponente))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnCrearJugador)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnNewButton))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 0, Short.MAX_VALUE)
+							.addComponent(lblJugador2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textDni_Jug2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+							.addGap(20)))
+					.addGap(107))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -123,26 +137,30 @@ public class VentanaPrincipal extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textDni_Jug1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblJugador1)
-						.addComponent(btnBuscarOponente))
+						.addComponent(lblJugador2)
+						.addComponent(textDni_Jug2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblJugador2)
-						.addComponent(textDni_Jug2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBuscarOponente)
+						.addComponent(btnCrearJugador)
 						.addComponent(btnNewButton))
-					.addContainerGap(60, Short.MAX_VALUE))
+					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 	
 	private void jugar(){
 		Partida p = new Partida();
-		p = ctrlJug.iniciarPartida(Integer.parseInt(textDni_Jug1.getText()), Integer.parseInt(textDni_Jug2.getText()));
+		Jugador j1 = new Jugador(Integer.parseInt(textDni_Jug1.getText()));
+		Jugador j2 = new Jugador(Integer.parseInt(textDni_Jug2.getText()));
+		p = ctrlJug.iniciarPartida( j1,  j2 );
 		if ( p != null){
 			VentanaJuego juego = new VentanaJuego();
 			juego.setP(p);
 			juego.mostrarPiezas();
 			juego.cargarTurno();
 			juego.setVisible(true);
+			this.setVisible(false);
 		}else
 			{
 			JOptionPane.showMessageDialog(this, "Jugadores no registrados");			}
@@ -153,6 +171,12 @@ public class VentanaPrincipal extends JFrame {
 		
 		ctrlJug.buscarOponente(Integer.parseInt(textDni_Jug1.getText()));
 		
+		
+	}
+	
+	private void crearJugador() {
+		new VentanaJugadorNuevo().setVisible(true);
+		this.setVisible(false);
 		
 	}
 }

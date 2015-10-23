@@ -32,6 +32,9 @@ public class Jugador {
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
+	public Jugador (int dni){
+		this.dni=dni;
+	}
 	
 	public Jugador (){
 		

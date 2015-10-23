@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Partida {
 
 	private int idPartida;
-	private int jugador1, jugador2;
+	private Jugador jugador1, jugador2;
 	private String turno = "blanca"; //kike: hay que definir BLANCA o BLANCO, fijate el metodo
 	private boolean estadoPartida= true; //true partida aun en juego - false partida finalizada
 	private ArrayList<Pieza> piezasPartida = new ArrayList<Pieza>();
@@ -17,16 +17,16 @@ public class Partida {
 	public void setIdPartida(int idPartida) {
 		this.idPartida = idPartida;
 	}
-	public int getJugador1() {
+	public Jugador getJugador1() {
 		return jugador1;
 	}
-	public void setJugador1(int jugador1) {
+	public void setJugador1(Jugador jugador1) {
 		this.jugador1 = jugador1;
 	}
-	public int getJugador2() {
+	public Jugador getJugador2() {
 		return jugador2;
 	}
-	public void setJugador2(int jugador2) {
+	public void setJugador2(Jugador jugador2) {
 		this.jugador2 = jugador2;
 	}
 	public String getTurno() {
@@ -53,9 +53,9 @@ public class Partida {
 	}
 	
 	
-	public Partida(int dni1, int dni2) {
-		this.jugador1= dni1;
-		this.jugador2=dni2;
+	public Partida(Jugador jug1, Jugador jug2) {
+		this.jugador1= jug1;
+		this.jugador2=jug2;
 		this.turno="blanca";
 		this.estadoPartida=true;
 		iniciarPiezas();
