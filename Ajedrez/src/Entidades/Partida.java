@@ -164,29 +164,7 @@ public class Partida {
 		//TODO: cambiar el estado de la pieza comida, sacarla del juego, cambiar de turnoss
 	}
 
-//	public ArrayList<Pieza> mostrarPiezas(String color) {
-//		ArrayList<Pieza> lista = new ArrayList<Pieza>();
-//		if(color.equals("blanca")){
-//			for (Pieza pieza : piezasPartida) 
-//			{
-//				if(pieza.isEstadoPieza())
-//					if(pieza.getColor().equals("blanca"))
-//						lista.add(pieza);      						
-//			}
-//								}	
-//		else{
-//			for (Pieza p : piezasPartida) 
-//		{
-//			if(p.isEstadoPieza())
-//				if(p.getColor().equals("negra"))
-//					 lista.add(p);    	
-//		}
-//		
-//	}
-//		
-//		return lista;
-//
-//	}
+
 	
 }
 	

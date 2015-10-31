@@ -38,21 +38,27 @@ public class ingreso extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int dni1 = Integer.valueOf(request.getParameter("dniJugador1"));
 		int dni2 = Integer.valueOf(request.getParameter("dniJugador2"));
+		String error= " ";
+		
 		
 		Controlador.CtrlJugar cj= new CtrlJugar();
 		Entidades.Jugador jug1 =  cj.buscarJugador(dni1);
 		Entidades.Jugador jug2 =  cj.buscarJugador(dni2);
 		if(jug1 == null){
-			System.out.println("jugador vacio");
-			//LLevar a jsp que cree el nuevo jugador
-						}if(jug2 == null){
-							System.out.println("jugador vacio");
-							//LLevar a jsp que cree el nuevo jugador		
-								}
-		Entidades.Partida partida = cj.iniciarPartida(jug1, jug2);
-		if(partida != null){
-			request.getSession().setAttribute("partidaSession", partida);
-			request.getRequestDispatcher("redirected.jsp").forward(request, response);
+						
+			request.setAttribute("dni", dni1);
+			request.getRequestDispatcher("JugadorNuevo.jsp").forward(request, response);
+							}else if(jug2 == null){
+													
+								request.setAttribute("dni", dni2);
+								request.getRequestDispatcher("JugadorNuevo.jsp").forward(request, response);
+							} else{
+									Entidades.Partida partida = cj.iniciarPartida(jug1, jug2);
+									if(partida != null){
+										request.setAttribute("msgError", error);
+										request.getSession().setAttribute("partidaSession", partida);
+										request.getRequestDispatcher("redirected.jsp").forward(request, response);
+									}
 		}
 	}
 

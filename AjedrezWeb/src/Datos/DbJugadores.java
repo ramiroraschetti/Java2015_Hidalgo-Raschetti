@@ -13,7 +13,7 @@ public class DbJugadores {
 
 	
 	
-	public void guardarJugador(Jugador jugador){
+	public void guardarJugador(int dni, String nombre, String apellido){
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		
@@ -22,9 +22,9 @@ public class DbJugadores {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"insert into jugador(dni, nombre, apellido) values (?,?,?)");
 			
-			stmt.setInt(1, jugador.getDni());
-			stmt.setString(2, jugador.getNombre());
-			stmt.setString(3, jugador.getApellido());
+			stmt.setInt(1, dni);
+			stmt.setString(2,nombre);
+			stmt.setString(3, apellido);
 			
 			stmt.execute();
 

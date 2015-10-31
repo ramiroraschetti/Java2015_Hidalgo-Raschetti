@@ -68,7 +68,7 @@ public abstract class Pieza {
 	
 	public boolean movimientoValido(char mueveX, int mueveY, boolean movimientoCome) throws Exception {
 		 if (!(mueveX>='a' && mueveX<='h') || !(mueveY>=1 && mueveY<=8)) {
-	            throw new Exception("Pieza out of bound");
+	            throw new Exception("Movimiento fuera el tablero");
 	        }
 		 
 		 char posX = getPosicion().getPosColumna();							

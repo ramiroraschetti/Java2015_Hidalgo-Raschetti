@@ -39,7 +39,7 @@ public class movimiento extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String desde = request.getParameter("Origen");
 		String hasta = request.getParameter("Destino");
-		String error="";
+		String error=" ";
 		Controlador.CtrlJugar cj= new CtrlJugar();
 		Partida partidaSession = (Partida) request.getSession().getAttribute("partidaSession");
 		
@@ -56,10 +56,12 @@ public class movimiento extends HttpServlet {
 		cj.actualizarPartida(partidaSession);
 		if(partidaSession.isEstadoPartida()==false){
 			
-		}
+			request.getSession().setAttribute("partidaSession", partidaSession);
+			request.getRequestDispatcher("JuegoFinalizado.jsp").forward(request, response);
+			}else{
 		request.setAttribute("msgError", error);
 		request.getSession().setAttribute("partidaSession", partidaSession);
-		request.getRequestDispatcher("redirected.jsp").forward(request, response);
+		request.getRequestDispatcher("redirected.jsp").forward(request, response);}
 	}
 
 }

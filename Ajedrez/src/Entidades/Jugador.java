@@ -46,6 +46,9 @@ public class Jugador {
 		this.partidasPendientes = partidasPendientes;
 	}
 	
+	public String toString(){
+		return this.getDni()+"" ;
+	}
 	
 	
 }

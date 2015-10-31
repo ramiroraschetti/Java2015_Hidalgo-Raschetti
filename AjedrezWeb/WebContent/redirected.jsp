@@ -51,9 +51,11 @@ body{
 #Destino{
 	
 	}
-#msgError{
-color:red;
-font-weight: bold;
+#titError{
+color:black;}
+.msgError{
+	color:red;
+	font-weight: bold;
 }
 .Pie{
   
@@ -77,22 +79,22 @@ font-weight: bold;
 	     	 <p>Piezas Blancas </p>
 	    	<%
 	    	ArrayList<Pieza> listPiezas = new ArrayList<Pieza>();
-			//ArrayList<Pieza> pieBlancas = new ArrayList<Pieza>();
+			
 			listPiezas = cj.buscarPiezas(partidaSession);
 			partidaSession.setPiezasPartida(listPiezas);
 			
 			for (Pieza a : listPiezas){
 				if("blanca".equals(a.getColor())){
-						//pieBlancas.add(a);
+						
 						out.println(a.getNombre()+" - "+a.getPosicion().getPosColumna()+a.getPosicion().getPosFila()+"<br/>");}}
-			//out.println(pieBlancas);
+			
 		%>
 	        </div>
 	        <div class="negras">
 	    	 <p>Piezas Negras </p>
 	      <%
 	    	ArrayList<Pieza> listPiezas2 = new ArrayList<Pieza>();
-			//ArrayList<Pieza> pieNegras = new ArrayList<Pieza>();
+			
 			listPiezas2 = cj.buscarPiezas(partidaSession);
 			partidaSession.setPiezasPartida(listPiezas);
 			
@@ -123,11 +125,11 @@ font-weight: bold;
 			        <input name="mover" type="submit" id="mover"  value="Mover" />
 		        </form>
 	      </div>
-	     <div class="msgError" > <%=request.getAttribute("msgError") %> </div>
+	     <div class="msgError" ><p id="titError">Mensaje: </p><%=request.getAttribute("msgError") %></div>
 	    </div>
 	 
 	    <div class="pie">
-	    <img src="Files/tablero1.jpg" width="200px" height="200px"  alt="Tablero de Ajedrez"/>
+	   
 	    </div>
 </div>
 </body>
